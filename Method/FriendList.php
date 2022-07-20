@@ -15,7 +15,7 @@ final class FriendList extends MethodQueryList
 	 */
 	public function gdoTable() { return GDO_Friendship::table(); }
 	
-	public function isGuestAllowed() { return Module_Friends::instance()->cfgGuestFriendships(); }
+	public function isGuestAllowed() : bool { return Module_Friends::instance()->cfgGuestFriendships(); }
 	
 	public function gdoDecorateList(GDT_List $list)
 	{

@@ -10,7 +10,7 @@ use GDO\User\GDO_User;
 
 final class Requests extends MethodQueryList
 {
-	public function isGuestAllowed() { return Module_Friends::instance()->cfgGuestFriendships(); }
+	public function isGuestAllowed() : bool { return Module_Friends::instance()->cfgGuestFriendships(); }
 	
 	/**
 	 * @return GDO

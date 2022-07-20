@@ -24,7 +24,7 @@ use GDO\Core\GDT_Template;
  */
 final class Request extends MethodForm
 {
-	public function isGuestAllowed() { return Module_Friends::instance()->cfgGuestFriendships(); }
+	public function isGuestAllowed() : bool { return Module_Friends::instance()->cfgGuestFriendships(); }
 	
 	public function createForm(GDT_Form $form) : void
 	{

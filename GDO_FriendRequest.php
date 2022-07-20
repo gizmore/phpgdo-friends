@@ -37,13 +37,13 @@ final class GDO_FriendRequest extends GDO
 	/**
 	 * @return GDO_User
 	 */
-	public function getUser() { return $this->getValue('frq_user'); }
+	public function getUser() { return $this->gdoValue('frq_user'); }
 	public function getUserID() { return $this->gdoVar('frq_user'); }
 	
 	/**
 	 * @return GDO_User
 	 */
-	public function getFriend() { return $this->getValue('frq_friend'); }
+	public function getFriend() { return $this->gdoValue('frq_friend'); }
 	public function getFriendID() { return $this->gdoVar('frq_friend'); }
 	
 	public function renderCard() { return GDT_Template::php('Friends', 'card/friendrequest.php', ['gdo' => $this]); }
