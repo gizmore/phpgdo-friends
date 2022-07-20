@@ -14,12 +14,12 @@ final class Accept extends MethodFriendRequest
 {
 	public function executeWithRequest(GDO_FriendRequest $request)
 	{
-		$forRequester = GDO_Friendship::blank(array(
+		GDO_Friendship::blank(array(
 			'friend_user' => $request->getUserID(),
 			'friend_friend' => $request->getFriendID(),
 			'friend_relation' => $request->getRelation(),
 		))->insert();
-		$forHisFriend = GDO_Friendship::blank(array(
+		GDO_Friendship::blank(array(
 			'friend_user' => $request->getFriendID(),
 			'friend_friend' => $request->getUserID(),
 			'friend_relation' => GDT_FriendRelation::reverseRelation($request->getRelation()),
