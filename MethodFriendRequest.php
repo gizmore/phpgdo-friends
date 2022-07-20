@@ -7,7 +7,7 @@ use GDO\Core\GDT_Response;
 
 abstract class MethodFriendRequest extends Method
 {
-	public function showInSitemap() { return false; }
+	public function showInSitemap() : bool { return false; }
 
 	/**
 	 * @param GDO_FriendRequest $request
