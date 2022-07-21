@@ -11,6 +11,7 @@ final class GDT_FriendRelation extends GDT_Enum
 		'bestfriend' => 'bestfriend',
 		'coworker' => 'coworker',
 		'husband' => 'wife',
+		'aunt' => 'nephew',
 	);
 	
 	public static function displayRelation($relation)

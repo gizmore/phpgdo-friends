@@ -11,7 +11,7 @@ use GDO\User\GDT_User;
 
 final class RemoveFrom extends Method
 {
-	public function isAlwaysTransactional() { return true; }
+	public function isAlwaysTransactional() : bool { return true; }
 	
 	public function gdoParameters() : array
 	{

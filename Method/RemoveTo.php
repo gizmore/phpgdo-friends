@@ -11,7 +11,7 @@ use GDO\Util\Common;
 
 final class RemoveTo extends Method
 {
-	public function isAlwaysTransactional() { return true; }
+	public function isAlwaysTransactional() : bool { return true; }
 	
 	public function gdoParameters() : array
 	{

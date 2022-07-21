@@ -22,7 +22,7 @@ final class GDO_FriendRequest extends GDO
 		);
 	}
 	
-	public function gdoHashcode() { return self::gdoHashcodeS($this->getVars(['frq_user', 'frq_friend', 'frq_relation'])); }
+	public function gdoHashcode() : string { return self::gdoHashcodeS($this->getVars(['frq_user', 'frq_friend', 'frq_relation'])); }
 	
 	public function getRelation() { return $this->gdoVar('frq_relation'); }
 	public function getReverseRelation() { return GDT_FriendRelation::reverseRelation($this->getRelation()); }
@@ -46,8 +46,8 @@ final class GDO_FriendRequest extends GDO
 	public function getFriend() { return $this->gdoValue('frq_friend'); }
 	public function getFriendID() { return $this->gdoVar('frq_friend'); }
 	
-	public function renderCard() { return GDT_Template::php('Friends', 'card/friendrequest.php', ['gdo' => $this]); }
-	public function renderList() { return GDT_Template::php('Friends', 'listitem/friendrequest.php', ['gdo' => $this]); }
+	public function renderCard() : string { return GDT_Template::php('Friends', 'card/friendrequest.php', ['gdo' => $this]); }
+	public function renderList() : string { return GDT_Template::php('Friends', 'listitem/friendrequest.php', ['gdo' => $this]); }
 	
 	##############
 	### Static ###
@@ -67,7 +67,8 @@ final class GDO_FriendRequest extends GDO
 		}
 		return $cached;
 	}
-	public function gdoAfterCreate()
+	
+	public function gdoAfterCreate(GDO $gdo) : void
 	{
 		$user = $this->getFriend();
 		$user->tempUnset('gdo_friendrequest_count');

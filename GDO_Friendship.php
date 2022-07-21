@@ -20,25 +20,22 @@ final class GDO_Friendship extends GDO
 		);
 	}
 	
-	/**
-	 * @return GDO_User
-	 */
-	public function getUser() { return $this->gdoValue('friend_user'); }
-	public function getUserID() { return $this->gdoVar('friend_user'); }
+	public function getUser() : GDO_User { return $this->gdoValue('friend_user'); }
+	public function getUserID() : string { return $this->gdoVar('friend_user'); }
 	
 	/**
 	 * @return GDO_User
 	 */
-	public function getFriend() { return $this->gdoValue('friend_friend'); }
-	public function getFriendID() { return $this->gdoVar('friend_friend'); }
+	public function getFriend() : GDO_User { return $this->gdoValue('friend_friend'); }
+	public function getFriendID() : string { return $this->gdoVar('friend_friend'); }
 
 	public function getCreated() { return $this->gdoVar('friend_created'); }
 	public function getRelation() { return $this->gdoVar('friend_relation'); }
 
 	public function displayRelation() { return GDT_FriendRelation::displayRelation($this->getRelation()); }
 	
-	public function renderList() { return GDT_Template::php('Friends', 'listitem/friendship.php', ['gdo' => $this]); }
-	public function renderCard() { return GDT_Template::php('Friends', 'card/friendship.php', ['gdo' => $this]); }
+	public function renderList() : string { return GDT_Template::php('Friends', 'listitem/friendship.php', ['gdo' => $this]); }
+	public function renderCard() : string { return GDT_Template::php('Friends', 'card/friendship.php', ['gdo' => $this]); }
 	
 	##############
 	### Static ###
@@ -70,7 +67,7 @@ final class GDO_Friendship extends GDO
 		return self::table()->countWhere('friend_user='.$user->getID());
 	}
 	
-	public function gdoAfterCreate()
+	public function gdoAfterCreate(GDO $gdo) : void
 	{
 		$user = $this->getUser();
 		$user->tempUnset('gdo_friendship_count');

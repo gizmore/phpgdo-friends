@@ -6,6 +6,7 @@ use GDO\Date\GDT_Duration;
 use GDO\UI\GDT_Link;
 use GDO\Core\GDT_Checkbox;
 use GDO\User\GDO_User;
+use GDO\User\GDT_ACL;
 use GDO\UI\GDT_Page;
 use GDO\User\GDT_Level;
 
@@ -13,15 +14,15 @@ use GDO\User\GDT_Level;
  * GDO_Friendship and user relation module
  * 
  * @author gizmore
- * @version 6.10
- * @since 5.0
+ * @version 7.0.1
+ * @since 5.0.0
  */
 final class Module_Friends extends GDO_Module
 {
 	##############
 	### Module ###
 	##############
-	public int $priority = 40;
+	public int $priority = 30;
 	public function onLoadLanguage() : void { $this->loadLanguage('lang/friends'); }
 	public function getClasses() : array
 	{
@@ -101,7 +102,7 @@ final class Module_Friends extends GDO_Module
 		
 		# Check user
 		/**
-		 * @var \GDO\Friends\GDT_ACL $setting
+		 * @var GDT_ACL $setting
 		 */
 		$setting = $module->userSetting($to, 'friendship_who');
 		return $setting->hasAccess($user, $to, $reason);
@@ -120,7 +121,7 @@ final class Module_Friends extends GDO_Module
 
 		# Other
 		/**
-		 * @var \GDO\Friends\GDT_ACL $setting
+		 * @var GDT_ACL $setting
 		 */
 		$setting = $module->userSetting($from, 'friendship_visible');
 		return $setting->hasAccess($user, $from, $reason);

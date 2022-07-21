@@ -15,7 +15,7 @@ abstract class MethodFriendRequest extends Method
 	 */
 	public abstract function executeWithRequest(GDO_FriendRequest $request);
 	
-	public function isAlwaysTransactional() { return true; }
+	public function isAlwaysTransactional() : bool { return true; }
 	
 	public function execute()
 	{
