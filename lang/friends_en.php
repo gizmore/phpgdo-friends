@@ -35,7 +35,7 @@ return [
 	'msg_friend_request_sent' => 'Your request has been sent.',
 	'err_already_related' => 'You and %s are already related.',
 	##################################################
-	'list_friends' => 'Your friends (%s)',
+	'list_friends_friendlist' => 'Your friends (%s)',
 	'friend_relation_since' => 'Is listed as your %s since %s',
 	'err_friend_request' => 'The relationship request could not been found.',
 	'msg_friends_accepted' => 'Your relationship status with %s has been accepted.',
@@ -44,7 +44,7 @@ return [
 	'list_friends_requests' => 'Friend Requests (%s)',
 	'friend_request_from' => 'Request as %s from %s',
 	##################################################
-	'list_pending_friend_requests' => 'Pending requests from you (%s)',
+	'list_friends_requesting' => 'Pending requests from you (%s)',
 	'friend_request_to' => 'Requested to be %s at %s',
 	'msg_request_revoked' => 'You have revoked your friend request. You cannot re-request until a cleanup.',
 	##################################################
@@ -59,5 +59,4 @@ return [
 	'mail_subj_frq_denied' => '[%s] %s denied the relationship',
 	'mail_subj_frq_accepted' => '[%s] %s is now your %s',
 	'mail_subj_friend_removed' => '[%s] %s removed your relationship',
-	'gallery_acl' => 'Gallery visibility'
 ];

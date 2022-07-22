@@ -2,15 +2,17 @@
 namespace GDO\Friends\Method;
 
 use GDO\Core\Method;
-use GDO\Core\Website;
 use GDO\Friends\GDO_FriendRequest;
-use GDO\Friends\Module_Friends;
 use GDO\User\GDO_User;
 use GDO\Util\Common;
 use GDO\User\GDT_User;
+use GDO\UI\GDT_Redirect;
+use GDO\Friends\WithFriendTabs;
 
 final class AcceptFrom extends Method
 {
+	use WithFriendTabs;
+	
 	public function isAlwaysTransactional() : bool { return true; }
 	
 	public function gdoParameters() : array
@@ -23,7 +25,8 @@ final class AcceptFrom extends Method
 	public function execute()
 	{
 		$user = GDO_User::current();
-		$fromId = Common::getRequestString('user');
+		$friend = $this->gdoParameterValue('user');
+		$fromId = $friend->getID();
 		if (!($request = GDO_FriendRequest::table()->getById($fromId, $user->getID())))
 		{
 			return $this->error('err_friend_request');
@@ -31,10 +34,6 @@ final class AcceptFrom extends Method
 		
 		Accept::make()->executeWithRequest($request);
 		
-		$tabs = Module_Friends::instance()->renderTabs();
-		$response = $this->message('msg_friends_accepted');
-		$redirect = Website::redirect(href('Friends', 'Requests'));
-		
-		return $tabs->addField($response)->addField($redirect);
+		return GDT_Redirect::make()->redirectMessage('msg_friends_accepted', [$friend->renderUserName()], href('Friends', 'Requests'));
 	}
 }

@@ -7,6 +7,7 @@ use GDO\Date\GDT_DateTime;
 use GDO\Core\GDT_Template;
 use GDO\User\GDT_User;
 use GDO\User\GDO_User;
+use GDO\UI\GDT_Message;
 
 final class GDO_FriendRequest extends GDO
 {
@@ -17,12 +18,13 @@ final class GDO_FriendRequest extends GDO
 			GDT_User::make('frq_user')->primary(),
 			GDT_User::make('frq_friend')->primary(),
 			GDT_FriendRelation::make('frq_relation')->initial('friend'),
+			GDT_Message::make('frq_message'),
 			GDT_CreatedAt::make('frq_created'),
 			GDT_DateTime::make('frq_denied'),
 		);
 	}
 	
-	public function gdoHashcode() : string { return self::gdoHashcodeS($this->getVars(['frq_user', 'frq_friend', 'frq_relation'])); }
+	public function gdoHashcode() : string { return self::gdoHashcodeS($this->gdoVars(['frq_user', 'frq_friend', 'frq_relation'])); }
 	
 	public function getRelation() { return $this->gdoVar('frq_relation'); }
 	public function getReverseRelation() { return GDT_FriendRelation::reverseRelation($this->getRelation()); }
@@ -34,20 +36,22 @@ final class GDO_FriendRequest extends GDO
 	
 	public function isFrom(GDO_User $user) { return $this->getUserID() === $user->getID(); }
 	
-	/**
-	 * @return GDO_User
-	 */
-	public function getUser() { return $this->gdoValue('frq_user'); }
+	public function getUser() : GDO_User { return $this->gdoValue('frq_user'); }
 	public function getUserID() { return $this->gdoVar('frq_user'); }
 	
-	/**
-	 * @return GDO_User
-	 */
-	public function getFriend() { return $this->gdoValue('frq_friend'); }
+	public function getFriend() : GDO_User { return $this->gdoValue('frq_friend'); }
 	public function getFriendID() { return $this->gdoVar('frq_friend'); }
 	
 	public function renderCard() : string { return GDT_Template::php('Friends', 'card/friendrequest.php', ['gdo' => $this]); }
 	public function renderList() : string { return GDT_Template::php('Friends', 'listitem/friendrequest.php', ['gdo' => $this]); }
+	
+	public function getMessageColumn() : GDT_Message { return $this->gdoColumn('frq_message'); }
+	
+	public function renderMessage() : string
+	{
+		$gdt = $this->getMessageColumn();
+		return $gdt->render();
+	}
 	
 	##############
 	### Static ###

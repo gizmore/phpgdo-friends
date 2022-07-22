@@ -16,39 +16,36 @@ use GDO\User\GDT_User;
 use GDO\User\GDO_User;
 use GDO\Form\GDT_Validator;
 use GDO\Core\GDT_Template;
+use GDO\Friends\WithFriendTabs;
 
 /**
  * Send a friend request.
+ * 
  * @author gizmore
  * @version 6.09
  */
 final class Request extends MethodForm
 {
-	public function isGuestAllowed() : bool { return Module_Friends::instance()->cfgGuestFriendships(); }
+	use WithFriendTabs;
 	
 	public function createForm(GDT_Form $form) : void
 	{
 		$gdo = GDO_FriendRequest::table();
 		$friend = GDT_User::make('frq_friend')->notNull();
-		$form->addFields(array(
+		$form->addFields(
 			$friend,
+			$gdo->gdoColumn('frq_message'),
 			GDT_Validator::make()->validator($form, $friend, [$this, 'validate_NoRelation']),
 			GDT_Validator::make()->validator($form, $friend, [$this, 'validate_CanRequest']),
-		));
+		);
 		if (Module_Friends::instance()->cfgRelations())
 		{
 			$form->addField($gdo->gdoColumn('frq_relation'));
 		}
-		$form->addFields(array(
+		$form->addFields(
 			GDT_AntiCSRF::make(),
-		));
+		);
 		$form->actions()->addField(GDT_Submit::make());
-	}
-	
-	public function execute()
-	{
-		$response = parent::execute();
-		return Module_Friends::instance()->renderTabs()->addField($response);
 	}
 	
 	public function validate_NoRelation(GDT_Form $form, GDT_User $field)
@@ -98,7 +95,7 @@ final class Request extends MethodForm
 		$data = $form->getFormVars();
 		if (!Module_Friends::instance()->cfgRelations())
 		{
-			$data['friend_relation'] = 'friends';
+			$data['frq_relation'] = 'friends';
 		}
 		
 		$request = GDO_FriendRequest::blank($data)->setVar('frq_user', $user->getID())->insert();
@@ -127,6 +124,7 @@ final class Request extends MethodForm
 		$tVars = array(
 			'user' => $user,
 			'friend' => $friend,
+			'message' => $request->renderMessage(),
 			'relation' => $relation,
 			'link_accept' => $linkAccept,
 			'link_deny' => $linkDeny,

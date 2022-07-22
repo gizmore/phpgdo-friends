@@ -1,25 +1,26 @@
 <?php
 namespace GDO\Friends\Method;
 
-use GDO\Core\GDO;
 use GDO\Friends\GDO_Friendship;
-use GDO\Friends\Module_Friends;
 use GDO\Table\GDT_List;
 use GDO\Table\MethodQueryList;
 use GDO\User\GDO_User;
+use GDO\Friends\WithFriendTabs;
 
+/**
+ * Show all friends.
+ * 
+ * @author gizmore
+ */
 final class FriendList extends MethodQueryList
 {
-	/**
-	 * @return GDO
-	 */
-	public function gdoTable() { return GDO_Friendship::table(); }
+	use WithFriendTabs;
 	
-	public function isGuestAllowed() : bool { return Module_Friends::instance()->cfgGuestFriendships(); }
+	public function gdoTable() { return GDO_Friendship::table(); }
 	
 	public function gdoDecorateList(GDT_List $list)
 	{
-		$list->title(t('list_friends', [$list->countItems()]));
+		$list->title('list_friends', [$list->countItems()]);
 	}
 	
 	public function getQuery()
@@ -28,9 +29,4 @@ final class FriendList extends MethodQueryList
 		return $this->gdoTable()->select()->where("friend_user={$user->getID()}");
 	}
 	
-	public function execute()
-	{
-		$response = parent::execute();
-		return Module_Friends::instance()->renderTabs()->addField($response);
-	}
 }

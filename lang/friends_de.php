@@ -35,7 +35,7 @@ return [
 	'msg_friend_request_sent' => 'Ihre Anfrage wurde gesendet.',
 	'err_already_related' => 'Sie und %s sind bereits befreundet.',
 	##################################################
-	'list_friends' => 'Ihre Freunde (%s)',
+	'list_friends_friendlist' => 'Ihre Freunde (%s)',
 	'friend_relation_since' => 'Ist ihr(e) %s seit %s',
 	'err_friend_request' => 'Die Anfrage konnte nicht gefunden werden.',
 	'msg_friends_accepted' => 'Ihr Freundschaftsstatus mit %s wurde akzeptiert.',
@@ -44,7 +44,7 @@ return [
 	'list_friends_requests' => 'Freundschaftsanfragen(%s)',
 	'friend_request_from' => 'Anfrage als %s von %s',
 	##################################################
-	'list_pending_friend_requests' => 'Ihre offenen Freundschafsanfragen (%s)',
+	'list_friends_requesting' => 'Ihre offenen Freundschafsanfragen (%s)',
 	'friend_request_to' => 'Requested to be %s at %s',
 	'msg_request_revoked' => 'Sie haben Ihre Anfrage zurückgezogen.',
 	##################################################
@@ -59,5 +59,4 @@ return [
 	'mail_subj_frq_denied' => '[%s] %s hat Ihre Anfrage abgelehnt',
 	'mail_subj_frq_accepted' => '[%s] %s ist nun Ihr %s',
 	'mail_subj_friend_removed' => '[%s] %s kündigt Ihre Freundschaft',
-	'gallery_acl' => 'Gallerie Sichtbarkeit',
 ];

@@ -4,11 +4,22 @@ use GDO\Core\Method;
 use GDO\User\GDO_User;
 use GDO\Util\Common;
 use GDO\Core\GDT_Response;
+use GDO\User\GDT_User;
+use GDO\Core\GDT_Token;
 
 abstract class MethodFriendRequest extends Method
 {
 	public function showInSitemap() : bool { return false; }
 
+	public function gdoParameters() : array
+	{
+		return [
+			GDT_User::make('from')->notNull(),
+			GDT_User::make('to')->notNull(),
+			GDT_Token::make('token'),
+		];
+	}
+	
 	/**
 	 * @param GDO_FriendRequest $request
 	 * @return GDT_Response

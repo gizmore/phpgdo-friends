@@ -1,17 +1,12 @@
 <?php
-use GDO\Avatar\GDO_Avatar;
+namespace GDO\Friends\tpl\listitem;
 use GDO\Friends\GDO_Friendship;
+use GDO\Table\GDT_ListItem;
 use GDO\UI\GDT_Button;
-
-$gdo instanceof GDO_Friendship;
-$friendship = $gdo;
-$friend = $friendship->getFriend();
-?>
-<md-list-item class="md-2-line">
-  <?= GDO_Avatar::renderAvatar($friend); ?>
-  <div class="md-list-item-text" layout="column">
-	<h3><?= $friend->displayName(); ?></h3>
-	<p><?= t('friend_relation_since', [$friendship->displayRelation(), tt($friendship->getCreated())]); ?></p>
-  </div>
-  <?= GDT_Button::make()->icon('delete')->href(href('Friends', 'Remove', '&friend='.$friend->getID()))->render(); ?>
-</md-list-item>
+/** @var $gdo GDO_Friendship **/
+$friend = $gdo->getFriend();
+$li = GDT_ListItem::make()->gdo($gdo);
+$li->creatorHeader('friend_friend');
+$li->title('friend_relation_since', [$gdo->displayRelation(), tt($gdo->getCreated())]);
+$li->actions()->addField(GDT_Button::make()->icon('delete')->href(href('Friends', 'Remove', '&friend='.$friend->getID())));
+echo $li->render();

@@ -9,6 +9,7 @@ use GDO\User\GDO_User;
 use GDO\User\GDT_ACL;
 use GDO\UI\GDT_Page;
 use GDO\User\GDT_Level;
+use GDO\UI\GDT_Bar;
 
 /**
  * GDO_Friendship and user relation module
@@ -47,13 +48,13 @@ final class Module_Friends extends GDO_Module
 	public function getConfig() : array
 	{
 		return array(
-			GDT_Checkbox::make('friendship_friendslink')->initial('0'),
+			GDT_Checkbox::make('hook_sidebar')->initial('1'),
 			GDT_Checkbox::make('friendship_guests')->initial('0'),
 			GDT_Checkbox::make('friendship_relations')->initial('1'),
 			GDT_Duration::make('friendship_cleanup_age')->initial('1d'),
 		);
 	}
-	public function cfgFriendsLink() { return $this->getConfigValue('friendship_friendslink'); }
+	public function cfgHookSidebar() { return $this->getConfigValue('hook_sidebar'); }
 	public function cfgGuestFriendships() { return $this->getConfigValue('friendship_guests'); }
 	public function cfgRelations() { return $this->getConfigValue('friendship_relations'); }
 	public function cfgCleanupAge() { return $this->getConfigValue('friendship_cleanup_age'); }
@@ -63,12 +64,28 @@ final class Module_Friends extends GDO_Module
 	##############
 	public function renderTabs()
 	{
-		return $this->responsePHP('tabs.php');
+		$nav = GDT_Page::$INSTANCE->topResponse();
+		$user = GDO_User::current();
+		$bar = GDT_Bar::make()->horizontal();
+		$friends = GDO_Friendship::count($user);
+		$incoming = GDO_FriendRequest::countIncomingFor($user);
+		$link3 = GDT_Link::make('link_incoming_friend_requests')->label('link_incoming_friend_requests', [$incoming])->href(href('Friends', 'Requests'));
+		if ($incoming)
+		{
+			$link3->icon('alert');
+		}
+		$bar->addFields(
+			GDT_Link::make('link_add_friend')->icon('add')->href(href('Friends', 'Request')),
+			GDT_Link::make('link_friends')->label('link_friends', [$friends])->icon('group')->href(href('Friends', 'FriendList')),
+			$link3,
+			GDT_Link::make('link_pending_friend_requests')->icon('wait')->href(href('Friends', 'Requesting')),
+			);
+		$nav->addField($bar);
 	}
 
 	public function onInitSidebar() : void
 	{
-		if ($this->cfgFriendsLink())
+		if ($this->cfgHookSidebar())
 		{
 		    $user = GDO_User::current();
 		    if ($user->isAuthenticated())

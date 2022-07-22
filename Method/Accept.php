@@ -26,8 +26,9 @@ final class Accept extends MethodFriendRequest
 		))->insert();
 		GDT_Hook::callWithIPC('FriendsAccept', $request->getUserID(), $request->getFriendID());
 		$this->sendMail($request);
+		$response = $this->message('msg_friends_accepted', [$request->getUser()->renderUserName()]);
 		$request->delete();
-		return $this->message('msg_friends_accepted');
+		return $response;
 	}
 	
 	protected function sendMail(GDO_FriendRequest $request)
@@ -45,7 +46,7 @@ final class Accept extends MethodFriendRequest
 			'friend' => $friend,
 			'relation' => $request->displayRelation(),
 		);
-		$body = GDT_Template::phpUser($friend, 'Recovery', 'mail/friend_accepted.php', $tVars);
+		$body = GDT_Template::phpUser($friend, 'Friends', 'mail/friend_accepted.php', $tVars);
 		$mail->setBody($body);
 		
 		$mail->sendToUser($friend);
