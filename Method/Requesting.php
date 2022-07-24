@@ -1,6 +1,7 @@
 <?php
 namespace GDO\Friends\Method;
 
+use GDO\Core\GDO;
 use GDO\Friends\GDO_FriendRequest;
 use GDO\Table\GDT_List;
 use GDO\Table\MethodQueryList;
@@ -16,7 +17,7 @@ final class Requesting extends MethodQueryList
 {
 	use WithFriendTabs;
 
-	public function gdoTable() { return GDO_FriendRequest::table(); }
+	public function gdoTable() : GDO { return GDO_FriendRequest::table(); }
 	
 	public function gdoDecorateList(GDT_List $list)
 	{

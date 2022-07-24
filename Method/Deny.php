@@ -20,7 +20,7 @@ final class Deny extends MethodFriendRequest
 		
 		$tabs = Module_Friends::instance()->renderTabs();
 		$response = $this->message('msg_friends_denied');
-		$redirect = Website::redirect(href('Friends', 'Requests'));
+		$redirect = $this->redirect(href('Friends', 'Requests'));
 		
 		return $tabs->addField($response)->addField($redirect);
 	}

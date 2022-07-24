@@ -1,20 +1,14 @@
 <?php
 namespace GDO\Friends\lang;
 return [
-	'cfg_friendship_who' => 'Who may send you friend requests?',
-	'cfg_friendship_visible' => 'Who may see your friends?',
+	'friend_who' => 'Who may send you friend requests?',
+	'friends_show' => 'Who may see your friends?',
 	'cfg_friendship_level' => 'What is your friend\'s minimum level?',
 	'cfg_friendship_guests' => 'Allow relations between guests?',
 	'cfg_friendship_relations' => 'Use extend relation states?',
 	'cfg_friendship_cleanup_age' => 'Clear deleted requests after N',
 	##################################################
 	'gdo_friendrequest' => 'Friendrequest',
-	##################################################
-	'enum_acl_all' => 'All',
-	'enum_acl_members' => 'Members',
-	'enum_acl_friends' => 'Friends',
-	'enum_acl_noone' => 'Noone',
-	'visibility' => 'Visibility',
 	##################################################
 	'err_only_member_access' => 'Only Members are allowed to access this.',
 	'err_only_friend_access' => 'Only their friends are allowed to access this.',
@@ -26,7 +20,7 @@ return [
 	'link_incoming_friend_requests' => 'Incoming requests (%s)',
 	'link_pending_friend_requests' => 'Sent requests',
 	##################################################
-	'ft_friends_request' => 'Add a friend',
+	'mt_friends_request' => 'Add a friend',
 	'frq_friend' => 'Name of your friend',
 	'err_friend_self' => 'You cannot befriend yourself here.',
 	'err_already_pending_denied' => 'A request for %s has been denied or cancelled recently.',

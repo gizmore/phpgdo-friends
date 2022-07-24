@@ -1,20 +1,14 @@
 <?php
 namespace GDO\Friends\lang;
 return [
-	'cfg_friendship_who' => 'Wer darf Ihnen Freundesanfragen schicken?',
-	'cfg_friendship_visible' => 'Wer darf Ihre Freunde sehen?',
+	'friend_who' => 'Wer darf Ihnen Freundesanfragen schicken?',
+	'friends_show' => 'Wer darf Ihre Freunde sehen?',
 	'cfg_friendship_level' => 'Was ist der minimal Nutzerlevel Ihrer Freunde?',
 	'cfg_friendship_guests' => 'Freundschaften zwischen Gästen erlauben?',
 	'cfg_friendship_relations' => 'Erweiterter Freundschaftsstatus nutzen?',
 	'cfg_friendship_cleanup_age' => 'Gelöschte Anfragen aufräumen nach...',
 	##################################################
 	'gdo_friendrequest' => 'Freundschaftsanfrage',
-	##################################################
-	'enum_acl_all' => 'Alle',
-	'enum_acl_members' => 'Mitglieder',
-	'enum_acl_friends' => 'Freunde',
-	'enum_acl_noone' => 'Niemand',
-	'visibility' => 'Sichtbarkeit',
 	##################################################
 	'err_only_member_access' => 'Nur Mitglieder dürfen darauf zugreifen.',
 	'err_only_friend_access' => 'Nur seine/ihre Freunde dürfen darauf zugreifen.',
@@ -26,7 +20,7 @@ return [
 	'link_incoming_friend_requests' => 'Eingehende Anfragen(%s)',
 	'link_pending_friend_requests' => 'Gesendete Anfragen',
 	##################################################
-	'ft_friends_request' => 'Freund(in) hinzufügen',
+	'mt_friends_request' => 'Freund(in) hinzufügen',
 	'frq_friend' => 'Name des Nutzers',
 	'err_friend_self' => 'Sie können Sich nicht selbst befreunden.',
 	'err_already_pending_denied' => 'Eine Anfrage an %s wurde erst kürzlich abgelehnt.',

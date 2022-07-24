@@ -38,21 +38,21 @@ final class Module_Friends extends GDO_Module
 	##############
 	public function getUserSettings()
 	{
-		return array(
-			GDT_ACL::make('friendship_who')->initial('acl_all'),
-			GDT_ACL::make('friendship_visible')->initial('acl_noone'),
-			GDT_Level::make('friendship_level')->initial('0'),
-		);
+		return [
+			GDT_ACL::make('friend_who')->initial('acl_all')->aclcapable(),
+			GDT_ACL::make('friends_show')->initial('acl_noone')->aclcapable(),
+			GDT_Level::make('friend_level')->initial('0'),
+		];
 	}
 	
 	public function getConfig() : array
 	{
-		return array(
+		return [
 			GDT_Checkbox::make('hook_sidebar')->initial('1'),
 			GDT_Checkbox::make('friendship_guests')->initial('0'),
 			GDT_Checkbox::make('friendship_relations')->initial('1'),
 			GDT_Duration::make('friendship_cleanup_age')->initial('1d'),
-		);
+		];
 	}
 	public function cfgHookSidebar() { return $this->getConfigValue('hook_sidebar'); }
 	public function cfgGuestFriendships() { return $this->getConfigValue('friendship_guests'); }
@@ -64,7 +64,7 @@ final class Module_Friends extends GDO_Module
 	##############
 	public function renderTabs()
 	{
-		$nav = GDT_Page::$INSTANCE->topResponse();
+		$nav = GDT_Page::instance()->topResponse();
 		$user = GDO_User::current();
 		$bar = GDT_Bar::make()->horizontal();
 		$friends = GDO_Friendship::count($user);
