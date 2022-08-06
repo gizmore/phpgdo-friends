@@ -23,9 +23,6 @@ final class GDO_Friendship extends GDO
 	public function getUser() : GDO_User { return $this->gdoValue('friend_user'); }
 	public function getUserID() : string { return $this->gdoVar('friend_user'); }
 	
-	/**
-	 * @return GDO_User
-	 */
 	public function getFriend() : GDO_User { return $this->gdoValue('friend_friend'); }
 	public function getFriendID() : string { return $this->gdoVar('friend_friend'); }
 
@@ -79,6 +76,7 @@ final class GDO_Friendship extends GDO
 	{
 		return GDO_Friendship::table()->select('*')->joinObject('friend_friend')->where("friend_user={$user->getID()}");
 	}
+	
 	public static function getFriends(GDO_User $user)
 	{
 		$query = self::getFriendsQuery($user);
@@ -86,4 +84,13 @@ final class GDO_Friendship extends GDO
 		$table = GDO_User::table();
 		return $table->fetchAll($result);
 	}
+	
+	#######################
+	### Friends Friends ###
+	#######################
+	public static function isFriendFriend(GDO_User $user, GDO_User $target) : bool
+	{
+		return false;
+	}
+	
 }
