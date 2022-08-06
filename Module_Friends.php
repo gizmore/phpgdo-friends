@@ -10,6 +10,7 @@ use GDO\User\GDT_ACL;
 use GDO\UI\GDT_Page;
 use GDO\User\GDT_Level;
 use GDO\UI\GDT_Bar;
+use GDO\User\GDT_ACLRelation;
 
 /**
  * GDO_Friendship and user relation module
@@ -39,9 +40,9 @@ final class Module_Friends extends GDO_Module
 	public function getUserSettings()
 	{
 		return [
-			GDT_ACL::make('friend_who')->initial('acl_all')->aclcapable(),
-			GDT_ACL::make('friends_show')->initial('acl_noone')->aclcapable(),
-			GDT_Level::make('friend_level')->initial('0'),
+			GDT_ACLRelation::make('friend_who')->initial('acl_all')->noacl(),
+			GDT_ACLRelation::make('friends_show')->initial('acl_noone')->noacl(),
+			GDT_Level::make('friend_level')->initial('0')->noacl(),
 		];
 	}
 	
