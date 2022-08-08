@@ -22,7 +22,8 @@ use GDO\Friends\WithFriendTabs;
  * Send a friend request.
  * 
  * @author gizmore
- * @version 6.09
+ * @version 7.0.1
+ * @since 6.9.0
  */
 final class Request extends MethodForm
 {
@@ -109,26 +110,23 @@ final class Request extends MethodForm
 	
 	private function sendMail(GDO_FriendRequest $request)
 	{
-		$mail = new Mail();
-		$mail->setSender(GDO_BOT_EMAIL);
-		$mail->setSenderName(GDO_BOT_NAME);
+		$mail = Mail::botMail();
 		
-
-		$friend = $request->getFriend();
 		$user = $request->getUser();
+		$friend = $request->getFriend();
 		$relation = GDT_FriendRelation::displayRelation($request->getRelation());
 		$append = "&from={$user->getID()}&for={$friend->getID()}&token={$request->gdoHashcode()}";
 		$linkAccept = GDT_Link::anchor(url('Friends', 'Accept', $append));
 		$linkDeny = GDT_Link::anchor(url('Friends', 'Deny', $append));
 		
-		$tVars = array(
+		$tVars = [
 			'user' => $user,
 			'friend' => $friend,
 			'message' => $request->renderMessage(),
 			'relation' => $relation,
 			'link_accept' => $linkAccept,
 			'link_deny' => $linkDeny,
-		);
+		];
 		$body = GDT_Template::phpUser($friend, 'Friends', 'mail/friend_request.php', $tVars);
 
 		$mail->setSubject(tusr($friend, 'mail_subj_friend_request', [sitename(), $user->renderUserName()]));
@@ -136,4 +134,5 @@ final class Request extends MethodForm
 		
 		$mail->sendToUser($friend);
 	}
+	
 }

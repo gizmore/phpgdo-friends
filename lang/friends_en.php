@@ -3,7 +3,7 @@ namespace GDO\Friends\lang;
 return [
 	'friend_who' => 'Who may send you friend requests?',
 	'friends_show' => 'Who may see your friends?',
-	'cfg_friendship_level' => 'What is your friend\'s minimum level?',
+	'friends_level' => 'What is your friend\'s minimum level?',
 	'cfg_friendship_guests' => 'Allow relations between guests?',
 	'cfg_friendship_relations' => 'Use extend relation states?',
 	'cfg_friendship_cleanup_age' => 'Clear deleted requests after N',

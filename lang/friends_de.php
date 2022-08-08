@@ -3,7 +3,7 @@ namespace GDO\Friends\lang;
 return [
 	'friend_who' => 'Wer darf Ihnen Freundesanfragen schicken?',
 	'friends_show' => 'Wer darf Ihre Freunde sehen?',
-	'cfg_friendship_level' => 'Was ist der minimal Nutzerlevel Ihrer Freunde?',
+	'friends_level' => 'Was ist der minimal Nutzerlevel Ihrer Freunde?',
 	'cfg_friendship_guests' => 'Freundschaften zwischen Gästen erlauben?',
 	'cfg_friendship_relations' => 'Erweiterter Freundschaftsstatus nutzen?',
 	'cfg_friendship_cleanup_age' => 'Gelöschte Anfragen aufräumen nach...',

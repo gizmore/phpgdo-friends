@@ -42,7 +42,7 @@ final class Module_Friends extends GDO_Module
 		return [
 			GDT_ACLRelation::make('friend_who')->initial('acl_all')->noacl(),
 			GDT_ACLRelation::make('friends_show')->initial('acl_noone')->noacl(),
-			GDT_Level::make('friend_level')->initial('0')->noacl(),
+			GDT_Level::make('friends_level')->label('friends_level')->initial('0')->noacl(),
 		];
 	}
 	
