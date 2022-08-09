@@ -10,11 +10,6 @@ return [
 	##################################################
 	'gdo_friendrequest' => 'Freundschaftsanfrage',
 	##################################################
-	'err_only_member_access' => 'Nur Mitglieder dürfen darauf zugreifen.',
-	'err_only_friend_access' => 'Nur seine/ihre Freunde dürfen darauf zugreifen.',
-	'err_only_private_access' => 'Nur der/die Nutzerin selbst darf darauf zugreifen.',
-	'err_unknown_acl_setting' => 'Unbekannte ACL Einstellung: %s.',
-	##################################################
 	'link_friends' => 'Freunde (%s)',
 	'link_add_friend' => 'Freund(in) hinzufügen',
 	'link_incoming_friend_requests' => 'Eingehende Anfragen(%s)',
