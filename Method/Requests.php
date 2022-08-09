@@ -2,6 +2,7 @@
 namespace GDO\Friends\Method;
 
 use GDO\Core\GDO;
+use GDO\DB\Query;
 use GDO\Friends\GDO_FriendRequest;
 use GDO\Table\GDT_List;
 use GDO\Table\MethodQueryList;
@@ -24,7 +25,7 @@ final class Requests extends MethodQueryList
 		$list->title('list_friends_requests', [$list->countItems()]);
 	}
 	
-	public function getQuery()
+	public function getQuery() : Query
 	{
 		$user = GDO_User::current();
 		return $this->gdoTable()->select()->where("frq_friend={$user->getID()} AND frq_denied IS NULL");

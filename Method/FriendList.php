@@ -2,6 +2,7 @@
 namespace GDO\Friends\Method;
 
 use GDO\Core\GDO;
+use GDO\DB\Query;
 use GDO\Friends\GDO_Friendship;
 use GDO\Table\GDT_List;
 use GDO\Table\MethodQueryList;
@@ -24,7 +25,7 @@ final class FriendList extends MethodQueryList
 		$list->title('list_friends', [$list->countItems()]);
 	}
 	
-	public function getQuery()
+	public function getQuery() : Query
 	{
 		$user = GDO_User::current();
 		return $this->gdoTable()->select()->where("friend_user={$user->getID()}");
