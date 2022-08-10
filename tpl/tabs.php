@@ -16,4 +16,4 @@ $bar->addFields(
 	$link3,
 	GDT_Link::make('link_pending_friend_requests')->icon('wait')->href(href('Friends', 'Requesting')),
 );
-echo $bar->renderCell();
+echo $bar->renderHTML();
