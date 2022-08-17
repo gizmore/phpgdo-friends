@@ -43,6 +43,8 @@ return [
 	'enum_coworker' => 'Arbeitskollegen',
 	'enum_husband' => 'Ehemann',
 	'enum_wife' => 'Ehefrau',
+	'enum_aunt' => 'Tante',
+	'enum_nephew' => 'Neffe',
 	##################################################
 	'mail_subj_friend_request' => '[%s] Beziehung mit %s',
 	'mail_subj_frq_denied' => '[%s] %s hat Ihre Anfrage abgelehnt',
