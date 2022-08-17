@@ -15,6 +15,11 @@ final class AcceptFrom extends Method
 	
 	public function isAlwaysTransactional() : bool { return true; }
 	
+	public function getMethodTitle() : string
+	{
+		return t('mt_friends_accept');
+	}
+	
 	public function gdoParameters() : array
 	{
 		return array(

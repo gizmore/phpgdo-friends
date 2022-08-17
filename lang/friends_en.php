@@ -51,4 +51,14 @@ return [
 	'mail_subj_frq_denied' => '[%s] %s denied the relationship',
 	'mail_subj_frq_accepted' => '[%s] %s is now your %s',
 	'mail_subj_friend_removed' => '[%s] %s removed your relationship',
+	##################################################
+	'mt_friends_friendlist' => 'Friendlist',
+	'mt_friends_requesting' => 'Friend requesting',
+	'mt_friends_requests' => 'Friend requests',
+	'mt_friends_deny' => 'Deny Friend Request',
+	'mt_friends_remove' => 'Remove Friend',
+	'mt_friends_removeto' => 'Revoke Request',
+	'mt_friends_removefrom' => 'Revoke Request',
+	'mt_friends_accept' => 'Accept Friend Request',
+	
 ];

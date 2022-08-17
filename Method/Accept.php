@@ -12,6 +12,11 @@ use GDO\Core\GDT_Template;
 
 final class Accept extends MethodFriendRequest
 {
+	public function getMethodTitle() : string
+	{
+		return t('mt_friends_accept');
+	}
+	
 	public function executeWithRequest(GDO_FriendRequest $request)
 	{
 		GDO_Friendship::blank(array(
