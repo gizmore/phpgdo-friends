@@ -1,7 +1,6 @@
 <?php
 namespace GDO\Friends\Method;
 
-use GDO\Core\Website;
 use GDO\Date\Time;
 use GDO\Friends\GDO_FriendRequest;
 use GDO\Friends\MethodFriendRequest;

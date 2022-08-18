@@ -111,7 +111,7 @@ final class Module_Friends extends GDO_Module
 		$module = Module_Friends::instance();
 		
 		# Check level
-		$level = $module->userSettingVar($to, 'friendship_level');
+		$level = $module->userSettingVar($to, 'friends_level');
 		if ($level > $user->getLevel())
 		{
 			$reason = t('err_level_required', [$level]);
@@ -122,7 +122,7 @@ final class Module_Friends extends GDO_Module
 		/**
 		 * @var GDT_ACL $setting
 		 */
-		$setting = $module->userSetting($to, 'friendship_who');
+		$setting = $module->userSetting($to, 'friends_who');
 		return $setting->hasAccess($user, $to, $reason);
 	}
 	
@@ -141,7 +141,7 @@ final class Module_Friends extends GDO_Module
 		/**
 		 * @var GDT_ACL $setting
 		 */
-		$setting = $module->userSetting($from, 'friendship_visible');
+		$setting = $module->userSetting($from, 'friends_visible');
 		return $setting->hasAccess($user, $from, $reason);
 	}
 }
