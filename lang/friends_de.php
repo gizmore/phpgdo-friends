@@ -54,4 +54,9 @@ return [
 	'mt_friends_friendlist' => 'Freundesliste',
 	'mt_friends_requesting' => 'Freundesanfragen',
 	'mt_friends_requests' => 'Freundesanfragen',
+	'mt_friends_deny' => 'Deny Friend Request',
+	'mt_friends_remove' => 'Remove Friend',
+	'mt_friends_removeto' => 'Revoke Request',
+	'mt_friends_removefrom' => 'Revoke Request',
+	'mt_friends_accept' => 'Accept Friend Request',
 ];
