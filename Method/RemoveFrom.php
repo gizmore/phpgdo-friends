@@ -30,7 +30,7 @@ final class RemoveFrom extends Method
 		return $this->gdoParameterValue('user');
 	}
 	
-	public function beforeExecute() : void
+	public function onRenderTabs() : void
 	{
 		Module_Friends::instance()->renderTabs();
 	}

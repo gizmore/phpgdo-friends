@@ -11,7 +11,7 @@ trait WithFriendTabs
 {
 	public function isGuestAllowed() : bool { return Module_Friends::instance()->cfgGuestFriendships(); }
 	
-	public function beforeExecute() : void
+	public function onRenderTabs() : void
 	{
 		Module_Friends::instance()->renderTabs();
 	}
