@@ -32,7 +32,7 @@ class GWS_FriendsList extends GWS_Command
 		$query = GDO_Friendship::table()->select('user_id')->joinObject('friend_friend')->where('friend_user='.$user->getID());
 		$pagemenu = GDT_PageMenu::make()->query($query);
 		$pagemenu->page($page);
-		$pagemenu->filterQuery($query);
+		$pagemenu->paginateQuery($query);
 		$result = $query->exec();
 		$payload = $this->pagemenuToBinary($pagemenu);
 		while ($friendid = $result->fetchValue())
