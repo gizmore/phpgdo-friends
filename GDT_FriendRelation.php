@@ -3,20 +3,40 @@ namespace GDO\Friends;
 
 use GDO\Core\GDO_Error;
 use GDO\Core\GDT_Enum;
+use GDO\Language\Trans;
 
+/**
+ * Friendship relation.
+ * 
+ * @author gizmore
+ * @version 7.0.1
+ * @since 6.7.1
+ */
 final class GDT_FriendRelation extends GDT_Enum
 {
-	public static $TYPES = array(
+	public static array $TYPES = [
 		'friend' => 'friend',
 		'bestfriend' => 'bestfriend',
 		'coworker' => 'coworker',
 		'husband' => 'wife',
 		'aunt' => 'nephew',
-	);
+	];
+	
+	protected function __construct()
+	{
+		parent::__construct();
+		$this->label('friend_relation');
+		$this->enumValues(...array_unique(array_merge(array_keys(self::$TYPES), array_values(self::$TYPES))));
+	}
 	
 	public static function displayRelation($relation)
 	{
-		return t('enum_'.$relation);
+		return self::displayRelationISO(Trans::$ISO, $relation);
+	}
+	
+	public static function displayRelationISO(string $iso, string $relation)
+	{
+		return tiso($iso, 'enum_'.$relation);
 	}
 	
 	public static function reverseRelation($relation)
@@ -35,10 +55,4 @@ final class GDT_FriendRelation extends GDT_Enum
 		}
 	}
 	
-	public function defaultLabel() : self { return $this->label('friend_relation'); }
-	
-	protected function __construct()
-	{
-		$this->enumValues(...array_unique(array_merge(array_keys(self::$TYPES), array_values(self::$TYPES))));
-	}
 }

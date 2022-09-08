@@ -25,16 +25,16 @@ return [
 	'err_already_related' => 'You and %s are already related.',
 	##################################################
 	'list_friends_friendlist' => 'Your friends (%s)',
-	'friend_relation_since' => 'Is listed as your %s since %s',
+	'friend_relation_since' => '%s is listed as your %s since %s',
 	'err_friend_request' => 'The relationship request could not been found.',
 	'msg_friends_accepted' => 'Your relationship status with %s has been accepted.',
 	'msg_friendship_deleted' => 'Your relationship status with %s has been deleted.',
 	##################################################
 	'list_friends_requests' => 'Friend Requests (%s)',
-	'friend_request_from' => 'Request as %s from %s',
+	'friend_request_from' => '%s requested you to be their %s on %s.',
 	##################################################
 	'list_friends_requesting' => 'Pending requests from you (%s)',
-	'friend_request_to' => 'Requested to be %s at %s',
+	'friend_request_to' => 'You asked %s to be your %s on %s.',
 	'msg_request_revoked' => 'You have revoked your friend request. You cannot re-request until a cleanup.',
 	##################################################
 	'friend_relation' => 'Relation',
@@ -61,4 +61,6 @@ return [
 	'mt_friends_removefrom' => 'Revoke Request',
 	'mt_friends_accept' => 'Accept Friend Request',
 	
+	'ask_remove_friendship' => 'Do you wanna end your relationship with %s?',
+	'ask_deny_friendship' => 'Do you want to deny the request?',
 ];

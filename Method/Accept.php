@@ -39,21 +39,24 @@ final class Accept extends MethodFriendRequest
 	protected function sendMail(GDO_FriendRequest $request)
 	{
 		$sitename = sitename();
-		$user = GDO_User::current();
+		$user = $request->getFriend();
 		$username = $user->renderUserName();
-		$friend = $request->getFriend();
-		
+		$friend = $request->getUser();
 		$mail = Mail::botMail();
-		$mail->setSubject(tusr($friend, 'mail_subj_frq_accepted', [$sitename, $username, $request->displayRelation()]));
-		
-		$tVars = array(
+		$mail->setSubject(tusr($friend, 
+			'mail_subj_frq_accepted', [
+				$sitename, $username,
+				$request->displayRelation()]));
+		$tVars = [
 			'user' => $user,
 			'friend' => $friend,
-			'relation' => $request->displayRelation(),
-		);
-		$body = GDT_Template::phpUser($friend, 'Friends', 'mail/friend_accepted.php', $tVars);
+			'relation' => $request->displayRelationISO($friend->getLangISO()),
+		];
+		$body = GDT_Template::phpUser(
+			$friend, 'Friends',
+			'mail/friend_accepted.php', $tVars);
 		$mail->setBody($body);
-		
 		$mail->sendToUser($friend);
 	}
+	
 }

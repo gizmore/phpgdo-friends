@@ -4,7 +4,6 @@ namespace GDO\Friends\Method;
 use GDO\Core\Method;
 use GDO\Friends\GDO_FriendRequest;
 use GDO\User\GDO_User;
-use GDO\Util\Common;
 use GDO\User\GDT_User;
 use GDO\UI\GDT_Redirect;
 use GDO\Friends\WithFriendTabs;
@@ -22,9 +21,9 @@ final class AcceptFrom extends Method
 	
 	public function gdoParameters() : array
 	{
-		return array(
+		return [
 			GDT_User::make('user')->notNull(),
-		);
+		];
 	}
 	
 	public function execute()

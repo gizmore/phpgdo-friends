@@ -33,6 +33,11 @@ final class Remove extends Method
 		return $this->gdoParameterValue('friend');
 	}
 	
+	public function onRenderTabs() : void
+	{
+		Module_Friends::instance()->renderTabs();
+	}
+	
 	public function execute()
 	{
 		$user = GDO_User::current();
@@ -40,7 +45,7 @@ final class Remove extends Method
 		$uid = $user->getID();
 		$fid = $friend->getID();
 		
-		# Delete Friendship
+		# Delete Friendships
 		$friendship = GDO_Friendship::findById($fid, $uid);
 		$friendship->delete();
 		$friendship = GDO_Friendship::findById($uid, $fid);
@@ -53,16 +58,13 @@ final class Remove extends Method
 		$this->sendMail($friendship);
 		
 		# Render and redirect
-		$tabs = Module_Friends::instance()->renderTabs();
-		$response = $this->message('msg_friendship_deleted', [$friendship->getFriend()->renderUserName()]);
-		$tabs->addField($response);
+		
+		$this->message('msg_friendship_deleted', [$friendship->getFriend()->renderUserName()]);
 		
 		if (Application::instance()->isHTML())
 		{
-			$redirect = $this->redirect(href('Friends', 'FriendList'));
-			$tabs->addField($redirect);
+			$this->redirect(href('Friends', 'FriendList'));
 		}
-		return $tabs;
 	}
 	
 	private function sendMail(GDO_Friendship $friendship)

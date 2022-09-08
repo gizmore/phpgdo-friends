@@ -3,25 +3,32 @@ namespace GDO\Friends;
 
 use GDO\Core\GDO;
 use GDO\Core\GDT_CreatedAt;
-use GDO\Date\GDT_DateTime;
 use GDO\Core\GDT_Template;
 use GDO\User\GDT_User;
 use GDO\User\GDO_User;
 use GDO\UI\GDT_Message;
+use GDO\Language\Trans;
+use GDO\Date\GDT_Timestamp;
 
+/**
+ * Relationship request.
+ * 
+ * @author gizmore
+ * @version 7.0.1
+ */
 final class GDO_FriendRequest extends GDO
 {
 	public function gdoCached() : bool { return false; }
 	public function gdoColumns() : array
 	{
-		return array(
+		return [
 			GDT_User::make('frq_user')->primary(),
 			GDT_User::make('frq_friend')->primary(),
-			GDT_FriendRelation::make('frq_relation')->initial('friend'),
+			GDT_FriendRelation::make('frq_relation')->initial('friend')->label('friend_relation'),
 			GDT_Message::make('frq_message'),
 			GDT_CreatedAt::make('frq_created'),
-			GDT_DateTime::make('frq_denied'),
-		);
+			GDT_Timestamp::make('frq_denied'),
+		];
 	}
 	
 	public function gdoHashcode() : string { return self::gdoHashcodeS($this->gdoVars(['frq_user', 'frq_friend', 'frq_relation'])); }
@@ -32,15 +39,22 @@ final class GDO_FriendRequest extends GDO
 	public function getDenied() { return $this->gdoVar('frq_denied'); }
 	public function isDenied() { return $this->getDenied() !== null; }
 	
-	public function displayRelation() { return GDT_FriendRelation::displayRelation($this->getRelation()); }
+	public function displayRelation() { return $this->displayRelationISO(Trans::$ISO); }
+	public function displayRelationISO(string $iso) { return GDT_FriendRelation::displayRelationISO($iso, $this->getRelation()); }
 	
-	public function isFrom(GDO_User $user) { return $this->getUserID() === $user->getID(); }
+	public function isFrom(GDO_User $user) { return $this->getUser() === $user; }
 	
 	public function getUser() : GDO_User { return $this->gdoValue('frq_user'); }
 	public function getUserID() { return $this->gdoVar('frq_user'); }
 	
 	public function getFriend() : GDO_User { return $this->gdoValue('frq_friend'); }
 	public function getFriendID() { return $this->gdoVar('frq_friend'); }
+	
+	public function getOtherUser(GDO_User $user)
+	{
+		$one = $this->getUser();
+		return $one === $user ? $this->getFriend() : $one;
+	}
 	
 	public function renderCard() : string { return GDT_Template::php('Friends', 'card/friendrequest.php', ['gdo' => $this]); }
 	public function renderList() : string { return GDT_Template::php('Friends', 'listitem/friendrequest.php', ['gdo' => $this]); }

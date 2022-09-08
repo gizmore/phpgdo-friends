@@ -25,16 +25,16 @@ return [
 	'err_already_related' => 'Sie und %s sind bereits befreundet.',
 	##################################################
 	'list_friends_friendlist' => 'Ihre Freunde (%s)',
-	'friend_relation_since' => 'Ist ihr(e) %s seit %s',
+	'friend_relation_since' => '%s ist ihr(e) %s seit %s.',
 	'err_friend_request' => 'Die Anfrage konnte nicht gefunden werden.',
 	'msg_friends_accepted' => 'Ihr Freundschaftsstatus mit %s wurde akzeptiert.',
 	'msg_friendship_deleted' => 'Ihr Freundschaftsstatus mit %s wurde gelöscht.',
 	##################################################
 	'list_friends_requests' => 'Freundschaftsanfragen(%s)',
-	'friend_request_from' => 'Anfrage als %s von %s',
+	'friend_request_from' => '%s fragte am %3$s ob Du ihr/sein %s sein möchtest.',
 	##################################################
 	'list_friends_requesting' => 'Ihre offenen Freundschafsanfragen (%s)',
-	'friend_request_to' => 'Requested to be %s at %s',
+	'friend_request_to' => 'Anfrage an %s für den Status %s, am %s.',
 	'msg_request_revoked' => 'Sie haben Ihre Anfrage zurückgezogen.',
 	##################################################
 	'friend_relation' => 'Beziehung',
@@ -59,4 +59,8 @@ return [
 	'mt_friends_removeto' => 'Revoke Request',
 	'mt_friends_removefrom' => 'Revoke Request',
 	'mt_friends_accept' => 'Accept Friend Request',
+
+	'ask_remove_friendship' => 'Möchtest du deine Beziehung mit %s beenden?',
+	'ask_deny_friendship' => 'Möchtest Du die Anfrage ablehnen?',
+	
 ];
