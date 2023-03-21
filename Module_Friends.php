@@ -2,31 +2,34 @@
 namespace GDO\Friends;
 
 use GDO\Core\GDO_Module;
-use GDO\Date\GDT_Duration;
-use GDO\UI\GDT_Link;
 use GDO\Core\GDT_Checkbox;
+use GDO\Date\GDT_Duration;
+use GDO\UI\GDT_Bar;
+use GDO\UI\GDT_Link;
+use GDO\UI\GDT_Page;
 use GDO\User\GDO_User;
 use GDO\User\GDT_ACL;
-use GDO\UI\GDT_Page;
-use GDO\User\GDT_Level;
-use GDO\UI\GDT_Bar;
 use GDO\User\GDT_ACLRelation;
+use GDO\User\GDT_Level;
 
 /**
  * GDO_Friendship and user relation module
- * 
- * @author gizmore
+ *
  * @version 7.0.1
  * @since 5.0.0
+ * @author gizmore
  */
 final class Module_Friends extends GDO_Module
 {
+
 	##############
 	### Module ###
 	##############
 	public int $priority = 30;
-	public function onLoadLanguage() : void { $this->loadLanguage('lang/friends'); }
-	public function getClasses() : array
+
+	public function onLoadLanguage(): void { $this->loadLanguage('lang/friends'); }
+
+	public function getClasses(): array
 	{
 		return [
 			GDO_Friendship::class,
@@ -45,8 +48,8 @@ final class Module_Friends extends GDO_Module
 			GDT_Level::make('friends_level')->label('friends_level')->initial('0')->noacl(),
 		];
 	}
-	
-	public function getConfig() : array
+
+	public function getConfig(): array
 	{
 		return [
 			GDT_Checkbox::make('hook_sidebar')->initial('1'),
@@ -55,14 +58,37 @@ final class Module_Friends extends GDO_Module
 			GDT_Duration::make('friendship_cleanup_age')->initial('1d'),
 		];
 	}
+
+	public function onInitSidebar(): void
+	{
+		if ($this->cfgHookSidebar())
+		{
+			$user = GDO_User::current();
+			if ($user->isAuthenticated())
+			{
+				$count = GDO_Friendship::count($user);
+				$link = GDT_Link::make('link_friends')->label('link_friends', [$count])->href(href('Friends', 'FriendList'));
+				if (GDO_FriendRequest::countIncomingFor($user))
+				{
+					$link->icon('alert');
+				}
+				GDT_Page::$INSTANCE->rightBar()->addField($link);
+			}
+		}
+	}
+
 	public function cfgHookSidebar() { return $this->getConfigValue('hook_sidebar'); }
+
 	public function cfgGuestFriendships() { return $this->getConfigValue('friendship_guests'); }
+
 	public function cfgRelations() { return $this->getConfigValue('friendship_relations'); }
-	public function cfgCleanupAge() { return $this->getConfigValue('friendship_cleanup_age'); }
-	
+
 	##############
 	### Render ###
 	##############
+
+	public function cfgCleanupAge() { return $this->getConfigValue('friendship_cleanup_age'); }
+
 	public function renderTabs()
 	{
 		$nav = GDT_Page::instance()->topResponse();
@@ -80,36 +106,19 @@ final class Module_Friends extends GDO_Module
 			GDT_Link::make('link_friends')->label('link_friends', [$friends])->icon('group')->href(href('Friends', 'FriendList')),
 			$link3,
 			GDT_Link::make('link_pending_friend_requests')->icon('wait')->href(href('Friends', 'Requesting')),
-			);
+		);
 		$nav->addField($bar);
 	}
 
-	public function onInitSidebar() : void
-	{
-		if ($this->cfgHookSidebar())
-		{
-		    $user = GDO_User::current();
-		    if ($user->isAuthenticated())
-		    {
-		        $count = GDO_Friendship::count($user);
-		        $link = GDT_Link::make('link_friends')->label('link_friends', [$count])->href(href('Friends', 'FriendList'));
-		        if (GDO_FriendRequest::countIncomingFor($user))
-		        {
-		            $link->icon('alert');
-		        }
-		        GDT_Page::$INSTANCE->rightBar()->addField($link);
-		    }
-		}
-	}
-	
 	#####################
 	### Setting Perms ###
 	#####################
+
 	public function canRequest(GDO_User $to, &$reason)
 	{
 		$user = GDO_User::current();
 		$module = Module_Friends::instance();
-		
+
 		# Check level
 		$level = $module->userSettingVar($to, 'friends_level');
 		if ($level > $user->getLevel())
@@ -117,7 +126,7 @@ final class Module_Friends extends GDO_Module
 			$reason = t('err_level_required', [$level]);
 			return false;
 		}
-		
+
 		# Check user
 		/**
 		 * @var GDT_ACL $setting
@@ -125,7 +134,7 @@ final class Module_Friends extends GDO_Module
 		$setting = $module->userSetting($to, 'friend_who');
 		return $setting->hasAccess($user, $to, $reason);
 	}
-	
+
 	public function canViewFriends(GDO_User $from, &$reason)
 	{
 		$module = Module_Friends::instance();
@@ -144,4 +153,5 @@ final class Module_Friends extends GDO_Module
 		$setting = $module->userSetting($from, 'friends_visible');
 		return $setting->hasAccess($user, $from, $reason);
 	}
+
 }

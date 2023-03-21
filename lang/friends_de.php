@@ -1,5 +1,6 @@
 <?php
 namespace GDO\Friends\lang;
+
 return [
 	'friend_who' => 'Wer darf Ihnen Freundesanfragen schicken?',
 	'friends_show' => 'Wer darf Ihre Freunde sehen?',
@@ -62,5 +63,5 @@ return [
 
 	'ask_remove_friendship' => 'Möchtest du deine Beziehung mit %s beenden?',
 	'ask_deny_friendship' => 'Möchtest Du die Anfrage ablehnen?',
-	
+
 ];

@@ -1,12 +1,14 @@
 <?php
 namespace GDO\Friends\tpl\listitem;
+
 use GDO\Friends\GDO_FriendRequest;
 use GDO\Table\GDT_ListItem;
 use GDO\UI\GDT_AddButton;
+use GDO\UI\GDT_DeleteButton;
 use GDO\User\GDO_User;
 use GDO\User\Method\Profile;
-use GDO\UI\GDT_DeleteButton;
-/** @var $gdo GDO_FriendRequest **/
+
+/** @var $gdo GDO_FriendRequest * */
 
 $friendship = $gdo; # gdo means friendship
 $me = GDO_User::current();
@@ -25,7 +27,7 @@ if ($friendship->isFrom($me))
 	]);
 	$li->actions()->addFields(
 		GDT_DeleteButton::make()->icon('delete')
-			->href(href('Friends', 'RemoveTo', '&friend='.$friend->getID()))
+			->href(href('Friends', 'RemoveTo', '&friend=' . $friend->getID()))
 			->confirmText('ask_remove_friendship', [$friend->renderUserName()]));
 }
 else
@@ -37,9 +39,9 @@ else
 		tt($friendship->getCreated()),
 	]);
 	$li->actions()->addFields(
-		GDT_AddButton::make()->icon('add')->href(href('Friends', 'AcceptFrom', '&user='.$friend->getID())),
+		GDT_AddButton::make()->icon('add')->href(href('Friends', 'AcceptFrom', '&user=' . $friend->getID())),
 		GDT_DeleteButton::make()->icon('block')
-			->href(href('Friends', 'RemoveFrom', '&user='.$friend->getID()))
+			->href(href('Friends', 'RemoveFrom', '&user=' . $friend->getID()))
 			->confirmText('ask_deny_friendship'));
 }
 

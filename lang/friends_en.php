@@ -1,5 +1,6 @@
 <?php
 namespace GDO\Friends\lang;
+
 return [
 	'friend_who' => 'Who may send you friend requests?',
 	'friends_show' => 'Who may see your friends?',
@@ -45,7 +46,7 @@ return [
 	'enum_wife' => 'Wife',
 	'enum_aunt' => 'Aunt',
 	'enum_nephew' => 'Nephew',
-	
+
 	##################################################
 	'mail_subj_friend_request' => '[%s] Relationship with %s',
 	'mail_subj_frq_denied' => '[%s] %s denied the relationship',
@@ -60,7 +61,7 @@ return [
 	'mt_friends_removeto' => 'Revoke Request',
 	'mt_friends_removefrom' => 'Revoke Request',
 	'mt_friends_accept' => 'Accept Friend Request',
-	
+
 	'ask_remove_friendship' => 'Do you wanna end your relationship with %s?',
 	'ask_deny_friendship' => 'Do you want to deny the request?',
 ];

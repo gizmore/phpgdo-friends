@@ -9,27 +9,23 @@ use GDO\User\GDT_User;
 
 /**
  * Remove your friend request to...
- * 
- * @author gizmore
+ *
  * @version 7.0.1
  * @since 6.9.0
+ * @author gizmore
  */
 final class RemoveTo extends Method
 {
-	public function isAlwaysTransactional() : bool { return true; }
-	
-	public function gdoParameters() : array
+
+	public function isAlwaysTransactional(): bool { return true; }
+
+	public function gdoParameters(): array
 	{
 		return [
 			GDT_User::make('friend')->notNull(),
 		];
 	}
-	
-	public function getFriend() : GDO_User
-	{
-		return $this->gdoParameterValue('friend');
-	}
-	
+
 	public function execute()
 	{
 		$user = GDO_User::current();
@@ -38,5 +34,10 @@ final class RemoveTo extends Method
 		$request->saveVar('frq_denied', Time::getDate());
 		return $this->redirectMessage('msg_request_revoked', null, href('Friends', 'Requesting'));
 	}
-	
+
+	public function getFriend(): GDO_User
+	{
+		return $this->gdoParameterValue('friend');
+	}
+
 }
