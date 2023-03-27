@@ -1,6 +1,7 @@
 <?php
 namespace GDO\Friends\Method;
 
+use GDO\Core\GDT;
 use GDO\Core\GDT_Hook;
 use GDO\Core\GDT_Template;
 use GDO\Form\GDT_AntiCSRF;
@@ -50,7 +51,7 @@ final class Request extends MethodForm
 		$form->actions()->addField(GDT_Submit::make());
 	}
 
-	public function formValidated(GDT_Form $form)
+	public function formValidated(GDT_Form $form): GDT
 	{
 		$user = GDO_User::current();
 		$data = $form->getFormVars();

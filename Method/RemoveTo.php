@@ -1,6 +1,7 @@
 <?php
 namespace GDO\Friends\Method;
 
+use GDO\Core\GDT;
 use GDO\Core\Method;
 use GDO\Date\Time;
 use GDO\Friends\GDO_FriendRequest;
@@ -26,7 +27,7 @@ final class RemoveTo extends Method
 		];
 	}
 
-	public function execute()
+	public function execute(): GDT
 	{
 		$user = GDO_User::current();
 		$friend = $this->getFriend();

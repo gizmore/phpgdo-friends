@@ -1,6 +1,7 @@
 <?php
 namespace GDO\Friends;
 
+use GDO\Core\GDT;
 use GDO\Core\GDT_Response;
 use GDO\Core\GDT_Token;
 use GDO\Core\Method;
@@ -24,7 +25,7 @@ abstract class MethodFriendRequest extends Method
 
 	public function isAlwaysTransactional(): bool { return true; }
 
-	public function execute()
+	public function execute(): GDT
 	{
 		$forId = Common::getRequestInt('for', GDO_User::current()->getID());
 		$fromId = Common::getRequestInt('from');

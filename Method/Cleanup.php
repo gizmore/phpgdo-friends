@@ -11,7 +11,7 @@ use GDO\Friends\Module_Friends;
 final class Cleanup extends MethodCronjob
 {
 
-	public function run()
+	public function run(): void
 	{
 		$module = Module_Friends::instance();
 		$cut = Time::getDate(Application::$TIME - $module->cfgCleanupAge());

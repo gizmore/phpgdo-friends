@@ -2,6 +2,7 @@
 namespace GDO\Friends\Method;
 
 use GDO\Core\Application;
+use GDO\Core\GDT;
 use GDO\Core\GDT_Hook;
 use GDO\Core\GDT_Template;
 use GDO\Core\Method;
@@ -34,7 +35,7 @@ final class Remove extends Method
 		Module_Friends::instance()->renderTabs();
 	}
 
-	public function execute()
+	public function execute(): GDT
 	{
 		$user = GDO_User::current();
 		$friend = $this->getFriend();
@@ -57,10 +58,7 @@ final class Remove extends Method
 
 		$this->message('msg_friendship_deleted', [$friendship->getFriend()->renderUserName()]);
 
-		if (Application::instance()->isHTML())
-		{
-			$this->redirect(href('Friends', 'FriendList'));
-		}
+		return $this->redirect(href('Friends', 'FriendList'));
 	}
 
 	public function getFriend(): GDO_User

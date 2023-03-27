@@ -1,6 +1,7 @@
 <?php
 namespace GDO\Friends\Method;
 
+use GDO\Core\GDT;
 use GDO\Core\Method;
 use GDO\Friends\GDO_FriendRequest;
 use GDO\Friends\Module_Friends;
@@ -31,7 +32,7 @@ final class RemoveFrom extends Method
 		Module_Friends::instance()->renderTabs();
 	}
 
-	public function execute()
+	public function execute(): GDT
 	{
 		$user = GDO_User::current();
 		$from = $this->getFriend();

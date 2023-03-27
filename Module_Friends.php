@@ -40,7 +40,7 @@ final class Module_Friends extends GDO_Module
 	##############
 	### Config ###
 	##############
-	public function getUserSettings()
+	public function getUserSettings(): array
 	{
 		return [
 			GDT_ACLRelation::make('friend_who')->initial('acl_all')->noacl(),
