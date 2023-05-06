@@ -1,6 +1,8 @@
 <?php
+declare(strict_types=1);
 namespace GDO\Friends\Method;
 
+use GDO\Core\GDO_ArgException;
 use GDO\Core\GDT;
 use GDO\Core\Method;
 use GDO\Date\Time;
@@ -11,12 +13,18 @@ use GDO\User\GDT_User;
 /**
  * Remove your friend request to...
  *
- * @version 7.0.1
+ * @version 7.0.3
  * @since 6.9.0
  * @author gizmore
  */
 final class RemoveTo extends Method
 {
+
+	public function isTrivial(): bool
+	{
+		return false;
+	}
+
 
 	public function isAlwaysTransactional(): bool { return true; }
 
@@ -36,6 +44,9 @@ final class RemoveTo extends Method
 		return $this->redirectMessage('msg_request_revoked', null, href('Friends', 'Requesting'));
 	}
 
+	/**
+	 * @throws GDO_ArgException
+	 */
 	public function getFriend(): GDO_User
 	{
 		return $this->gdoParameterValue('friend');

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace GDO\Friends\Method;
 
 use GDO\Core\Application;
@@ -15,11 +16,16 @@ use GDO\User\GDT_User;
 /**
  * Remove a friend request.
  *
- * @version 7.0.1
+ * @version 7.0.3
  * @author gizmore
  */
 final class Remove extends Method
 {
+
+	public function isTrivial(): bool
+	{
+		return false;
+	}
 
 	public function isAlwaysTransactional(): bool { return true; }
 
@@ -66,7 +72,7 @@ final class Remove extends Method
 		return $this->gdoParameterValue('friend');
 	}
 
-	private function sendMail(GDO_Friendship $friendship)
+	private function sendMail(GDO_Friendship $friendship): void
 	{
 		$user = GDO_User::current();
 		$friend = $friendship->getFriend();

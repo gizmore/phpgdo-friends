@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace GDO\Friends;
 
 use GDO\Core\GDO_Module;
@@ -13,9 +14,9 @@ use GDO\User\GDT_ACLRelation;
 use GDO\User\GDT_Level;
 
 /**
- * GDO_Friendship and user relation module
+ * GDO_Friendship and user relation module.
  *
- * @version 7.0.1
+ * @version 7.0.3
  * @since 5.0.0
  * @author gizmore
  */
@@ -27,7 +28,10 @@ final class Module_Friends extends GDO_Module
 	##############
 	public int $priority = 30;
 
-	public function onLoadLanguage(): void { $this->loadLanguage('lang/friends'); }
+	public function onLoadLanguage(): void
+	{
+		$this->loadLanguage('lang/friends');
+	}
 
 	public function getClasses(): array
 	{
@@ -53,7 +57,7 @@ final class Module_Friends extends GDO_Module
 	{
 		return [
 			GDT_Checkbox::make('hook_sidebar')->initial('1'),
-			GDT_Checkbox::make('friendship_guests')->initial('0'),
+			GDT_Checkbox::make('friendship_guests')->initial('1'),
 			GDT_Checkbox::make('friendship_relations')->initial('1'),
 			GDT_Duration::make('friendship_cleanup_age')->initial('1d'),
 		];
@@ -77,19 +81,23 @@ final class Module_Friends extends GDO_Module
 		}
 	}
 
-	public function cfgHookSidebar() { return $this->getConfigValue('hook_sidebar'); }
+	public function cfgHookSidebar(): bool { return $this->getConfigValue('hook_sidebar'); }
 
-	public function cfgGuestFriendships() { return $this->getConfigValue('friendship_guests'); }
+	public function cfgGuestFriendships(): bool { return $this->getConfigValue('friendship_guests'); }
 
-	public function cfgRelations() { return $this->getConfigValue('friendship_relations'); }
+	public function cfgRelations(): bool { return $this->getConfigValue('friendship_relations'); }
+
+	public function cfgCleanupAge(): float
+	{
+		return $this->getConfigValue('friendship_cleanup_age');
+	}
+
 
 	##############
 	### Render ###
 	##############
 
-	public function cfgCleanupAge() { return $this->getConfigValue('friendship_cleanup_age'); }
-
-	public function renderTabs()
+	public function renderTabs(): void
 	{
 		$nav = GDT_Page::instance()->topResponse();
 		$user = GDO_User::current();
@@ -114,7 +122,7 @@ final class Module_Friends extends GDO_Module
 	### Setting Perms ###
 	#####################
 
-	public function canRequest(GDO_User $to, &$reason)
+	public function canRequest(GDO_User $to, string &$reason): bool
 	{
 		$user = GDO_User::current();
 		$module = Module_Friends::instance();
@@ -135,7 +143,7 @@ final class Module_Friends extends GDO_Module
 		return $setting->hasAccess($user, $to, $reason);
 	}
 
-	public function canViewFriends(GDO_User $from, &$reason)
+	public function canViewFriends(GDO_User $from, string &$reason): bool
 	{
 		$module = Module_Friends::instance();
 

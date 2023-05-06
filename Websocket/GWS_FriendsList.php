@@ -38,7 +38,7 @@ class GWS_FriendsList extends GWS_Command
 		$pagemenu->paginateQuery($query);
 		$result = $query->exec();
 		$payload = $this->pagemenuToBinary($pagemenu);
-		while ($friendid = $result->fetchValue())
+		while ($friendid = $result->fetchVar())
 		{
 			$payload .= $msg->write32($friendid);
 		}

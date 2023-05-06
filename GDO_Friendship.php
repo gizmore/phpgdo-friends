@@ -18,7 +18,7 @@ final class GDO_Friendship extends GDO
 	public static function getRelationBetween(GDO_User $user, GDO_User $friend)
 	{
 		return self::table()->select('friend_relation')->
-		where("friend_user={$user->getID()} AND friend_friend={$friend->getID()}")->exec()->fetchValue();
+		where("friend_user={$user->getID()} AND friend_friend={$friend->getID()}")->exec()->fetchVar();
 	}
 
 	public static function count(GDO_User $user)
