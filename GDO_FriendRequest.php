@@ -30,7 +30,6 @@ final class GDO_FriendRequest extends GDO
 		{
 			$cached = self::table()->countWhere("frq_friend={$user->getID()} AND frq_denied IS NULL");
 			$user->tempSet('gdo_friendrequest_count', $cached);
-			$user->recache();
 		}
 		return $cached;
 	}
@@ -59,7 +58,6 @@ final class GDO_FriendRequest extends GDO
 	{
 		$user = $this->getFriend();
 		$user->tempUnset('gdo_friendrequest_count');
-		$user->recache();
 	}
 
 	public function getFriend(): GDO_User { return $this->gdoValue('frq_friend'); }

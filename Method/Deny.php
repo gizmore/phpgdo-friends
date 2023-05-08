@@ -1,6 +1,9 @@
 <?php
+declare(strict_types=1);
 namespace GDO\Friends\Method;
 
+use GDO\Core\GDO_DBException;
+use GDO\Core\GDT;
 use GDO\Core\GDT_Template;
 use GDO\Date\Time;
 use GDO\Friends\GDO_FriendRequest;
@@ -12,20 +15,21 @@ use GDO\User\GDO_User;
 final class Deny extends MethodFriendRequest
 {
 
-	public function executeWithRequest(GDO_FriendRequest $request)
+	/**
+	 * @throws GDO_DBException
+	 */
+	public function executeWithRequest(GDO_FriendRequest $request): GDT
 	{
 		$request->saveVar('frq_denied', Time::getDate());
 
 		$this->sendMail($request);
 
-		$tabs = Module_Friends::instance()->renderTabs();
-		$response = $this->message('msg_friends_denied');
-		$redirect = $this->redirect(href('Friends', 'Requests'));
-
-		return $tabs->addField($response)->addField($redirect);
+		Module_Friends::instance()->renderTabs();
+		$this->message('msg_friends_denied');
+		return $this->redirect(href('Friends', 'Requests'));
 	}
 
-	private function sendMail(GDO_FriendRequest $request)
+	private function sendMail(GDO_FriendRequest $request): void
 	{
 		$sitename = sitename();
 		$user = GDO_User::current();

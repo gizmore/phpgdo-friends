@@ -1,6 +1,10 @@
 <?php
+declare(strict_types=1);
 namespace GDO\Friends\Method;
 
+use GDO\Core\GDO_DBException;
+use GDO\Core\GDO_Exception;
+use GDO\Core\GDT;
 use GDO\Core\GDT_Hook;
 use GDO\Core\GDT_Template;
 use GDO\Friends\GDO_FriendRequest;
@@ -17,7 +21,11 @@ final class Accept extends MethodFriendRequest
 		return t('mt_friends_accept');
 	}
 
-	public function executeWithRequest(GDO_FriendRequest $request)
+	/**
+	 * @throws GDO_Exception
+	 * @throws GDO_DBException
+	 */
+	public function executeWithRequest(GDO_FriendRequest $request): GDT
 	{
 		GDO_Friendship::blank([
 			'friend_user' => $request->getUserID(),
@@ -36,7 +44,7 @@ final class Accept extends MethodFriendRequest
 		return $response;
 	}
 
-	protected function sendMail(GDO_FriendRequest $request)
+	protected function sendMail(GDO_FriendRequest $request): void
 	{
 		$sitename = sitename();
 		$user = $request->getFriend();

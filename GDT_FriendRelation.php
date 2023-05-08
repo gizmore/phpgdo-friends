@@ -26,6 +26,7 @@ final class GDT_FriendRelation extends GDT_Enum
 	protected function __construct()
 	{
 		parent::__construct();
+		$this->icon('hands');
 		$this->label('friend_relation');
 		$this->enumValues(...array_unique(array_merge(array_keys(self::$TYPES), array_values(self::$TYPES))));
 	}

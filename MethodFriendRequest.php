@@ -1,8 +1,9 @@
 <?php
+declare(strict_types=1);
 namespace GDO\Friends;
 
+use GDO\Core\GDO_DBException;
 use GDO\Core\GDT;
-use GDO\Core\GDT_Response;
 use GDO\Core\GDT_Token;
 use GDO\Core\Method;
 use GDO\User\GDO_User;
@@ -25,6 +26,9 @@ abstract class MethodFriendRequest extends Method
 
 	public function isAlwaysTransactional(): bool { return true; }
 
+	/**
+	 * @throws GDO_DBException
+	 */
 	public function execute(): GDT
 	{
 		$forId = Common::getRequestInt('for', GDO_User::current()->getID());
@@ -47,11 +51,6 @@ abstract class MethodFriendRequest extends Method
 		return $this->executeWithRequest($request);
 	}
 
-	/**
-	 * @param GDO_FriendRequest $request
-	 *
-	 * @return GDT_Response
-	 */
-	abstract public function executeWithRequest(GDO_FriendRequest $request);
+	abstract public function executeWithRequest(GDO_FriendRequest $request): GDT;
 
 }
