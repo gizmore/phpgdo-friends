@@ -10,7 +10,7 @@ namespace GDO\Friends;
 trait WithFriendTabs
 {
 
-	public function isGuestAllowed(): string { return Module_Friends::instance()->cfgGuestFriendships(); }
+	public function isGuestAllowed(): bool { return Module_Friends::instance()->cfgGuestFriendships(); }
 
 	public function onRenderTabs(): void
 	{

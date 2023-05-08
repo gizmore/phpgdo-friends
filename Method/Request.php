@@ -31,7 +31,7 @@ final class Request extends MethodForm
 
 	use WithFriendTabs;
 
-	public function createForm(GDT_Form $form): void
+	protected function createForm(GDT_Form $form): void
 	{
 		$gdo = GDO_FriendRequest::table();
 		$friend = GDT_User::make('frq_friend')->notNull();

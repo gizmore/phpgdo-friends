@@ -1,7 +1,7 @@
 <?php
 namespace GDO\Friends;
 
-use GDO\Core\GDO_Error;
+use GDO\Core\GDO_Exception;
 use GDO\Core\GDT_Enum;
 use GDO\Language\Trans;
 
@@ -52,7 +52,7 @@ final class GDT_FriendRelation extends GDT_Enum
 		}
 		else
 		{
-			throw new GDO_Error('err_reverse_friends_relation');
+			throw new GDO_Exception('err_reverse_friends_relation');
 		}
 	}
 

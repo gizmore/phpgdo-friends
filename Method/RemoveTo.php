@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace GDO\Friends\Method;
 
-use GDO\Core\GDO_ArgException;
+use GDO\Core\GDO_ArgError;
 use GDO\Core\GDT;
 use GDO\Core\Method;
 use GDO\Date\Time;
@@ -45,7 +45,7 @@ final class RemoveTo extends Method
 	}
 
 	/**
-	 * @throws GDO_ArgException
+	 * @throws GDO_ArgError
 	 */
 	public function getFriend(): GDO_User
 	{
