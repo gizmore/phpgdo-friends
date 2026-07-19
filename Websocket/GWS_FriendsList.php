@@ -40,7 +40,7 @@ class GWS_FriendsList extends GWS_Command
 		$payload = $this->pagemenuToBinary($pagemenu);
 		while ($friendid = $result->fetchVar())
 		{
-			$payload .= $msg->write32($friendid);
+			$payload .= $msg->wr32($friendid);
 		}
 
 		return $msg->replyBinary($msg->cmd(), $payload);
