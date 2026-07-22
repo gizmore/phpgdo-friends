@@ -11,7 +11,7 @@ return [
 	##################################################
 	'gdo_friendrequest' => 'Freundschaftsanfrage',
 	##################################################
-	'link_friends' => 'Freunde (%s)',
+	'link_friends' => 'Freunde (%d)',
 	'link_add_friend' => 'Freund(in) hinzufügen',
 	'link_incoming_friend_requests' => 'Eingehende Anfragen(%s)',
 	'link_pending_friend_requests' => 'Gesendete Anfragen',

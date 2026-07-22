@@ -71,7 +71,7 @@ final class Module_Friends extends GDO_Module
 			if ($user->isAuthenticated())
 			{
 				$count = GDO_Friendship::count($user);
-				$link = GDT_Link::make('link_friends')->label('link_friends', [$count])->href(href('Friends', 'FriendList'));
+				$link = GDT_Link::make('link_friends')->text('link_friends', [$count])->href(href('Friends', 'FriendList'));
 				if (GDO_FriendRequest::countIncomingFor($user))
 				{
 					$link->icon('alert');
