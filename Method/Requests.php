@@ -27,7 +27,7 @@ final class Requests extends MethodQueryList
 	public function gdoTable(): GDO { return GDO_FriendRequest::table(); }
 
 
-	public function getQuery(): Query
+	public function gdoQuery(): Query
 	{
 		$user = GDO_User::current();
 		return $this->gdoTable()->select()->where("frq_friend={$user->getID()} AND frq_denied IS NULL");

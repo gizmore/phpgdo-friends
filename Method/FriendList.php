@@ -27,7 +27,7 @@ final class FriendList extends MethodQueryList
 	public function gdoTable(): GDO { return GDO_Friendship::table(); }
 
 
-	public function getQuery(): Query
+	public function gdoQuery(): Query
 	{
 		$user = GDO_User::current();
 		return $this->gdoTable()->select()->where("friend_user={$user->getID()}");
