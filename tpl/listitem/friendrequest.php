@@ -5,6 +5,7 @@ use GDO\Friends\GDO_FriendRequest;
 use GDO\Table\GDT_ListItem;
 use GDO\UI\GDT_AddButton;
 use GDO\UI\GDT_DeleteButton;
+use GDO\UI\GDT_Headline;
 use GDO\User\GDO_User;
 use GDO\User\Method\Profile;
 
@@ -33,11 +34,11 @@ if ($friendship->isFrom($me))
 else
 {
 	$li->creatorHeader('frq_user');
-	$li->title('friend_request_from', [
-		$friend->renderUserName(),
-		$friendship->displayRelation(),
-		tt($friendship->getCreated()),
-	]);
+		$li->title(GDT_Headline::make()->text('friend_request_from', [
+			$friend->renderUserName(),
+			$friendship->displayRelation(),
+			tt($friendship->getCreated()),
+		])->level(3));
 	$li->actions()->addFields(
 		GDT_AddButton::make()->icon('add')->href(href('Friends', 'AcceptFrom', '&user=' . $friend->getID())),
 		GDT_DeleteButton::make()->icon('block')
@@ -45,11 +46,11 @@ else
 			->confirmText('ask_deny_friendship'));
 }
 
-$li->subtitle('user_info_subtitle', [
+$li->subtitle(GDT_Headline::make()->text('user_info_subtitle', [
 	$friend->renderUserName(),
 	Profile::getHighestPermission($friend),
 	sitename(),
 	$friend->getLevel(),
-]);
+])->level(5));
 
 echo $li->render();
