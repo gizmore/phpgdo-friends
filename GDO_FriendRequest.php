@@ -74,7 +74,7 @@ final class GDO_FriendRequest extends GDO
 
 	public function displayRelation() { return $this->displayRelationISO(Trans::$ISO); }
 
-	public function displayRelationISO(string $iso) { return GDT_FriendRelation::displayRelationISO($iso, $this->getRelation()); }
+	public function displayRelationISO(?string $iso) { return GDT_FriendRelation::displayRelationISO($iso ?? Trans::$ISO, $this->getRelation()); }
 
 	public function isFrom(GDO_User $user) { return $this->getUser() === $user; }
 
