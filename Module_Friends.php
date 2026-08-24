@@ -158,7 +158,7 @@ final class Module_Friends extends GDO_Module
 		/**
 		 * @var GDT_ACL $setting
 		 */
-		$setting = $module->userSetting($from, 'friends_visible');
+		$setting = $module->userSetting($from, 'friends_show');
 		return $setting->hasAccess($user, $from, $reason);
 	}
 
