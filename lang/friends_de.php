@@ -12,11 +12,11 @@ return [
 	'gdo_friendrequest' => 'Freundschaftsanfrage',
 	##################################################
 	'link_friends' => 'Freunde (%d)',
-	'link_add_friend' => 'Freund(in) hinzufügen',
-	'link_incoming_friend_requests' => 'Eingehende Anfragen(%s)',
+	'link_add_friend' => 'Freundschaft hinzufügen',
+	'link_incoming_friend_requests' => 'Eingehende Anfragen (%d)',
 	'link_pending_friend_requests' => 'Gesendete Anfragen',
 	##################################################
-	'mt_friends_request' => 'Freund(in) hinzufügen',
+	'mt_friends_request' => 'Freundschaft hinzufügen',
 	'frq_friend' => 'Name des Nutzers',
 	'err_friend_self' => 'Sie können Sich nicht selbst befreunden.',
 	'err_already_pending_denied' => 'Eine Anfrage an %s wurde erst kürzlich abgelehnt.',
