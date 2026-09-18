@@ -4,6 +4,7 @@ namespace GDO\Friends;
 use GDO\Core\GDO;
 use GDO\Core\GDT_CreatedAt;
 use GDO\Core\GDT_Template;
+use GDO\DB\Cache;
 use GDO\User\GDO_User;
 use GDO\User\GDT_User;
 
@@ -25,11 +26,25 @@ final class GDO_Friendship extends GDO
 	{
 		if (null === ($cached = $user->tempGet('gdo_friendship_count')))
 		{
-			$cached = self::queryCount($user);
+			if (null === ($cached = Cache::get(self::cacheKey($user), PHP_INT_MAX)))
+			{
+				$cached = self::queryCount($user);
+				Cache::set(self::cacheKey($user), $cached, 0);
+			}
 			$user->tempSet('gdo_friendship_count', $cached);
-// 			$user->recache();
 		}
 		return $cached;
+	}
+
+	private static function cacheKey(GDO_User $user): string
+	{
+		return 'friends.count.' . $user->getID();
+	}
+
+	public static function invalidateCount(GDO_User $user): void
+	{
+		$user->tempUnset('gdo_friendship_count');
+		Cache::remove(self::cacheKey($user));
 	}
 
 	private static function queryCount(GDO_User $user)
@@ -77,9 +92,12 @@ final class GDO_Friendship extends GDO
 
 	public function gdoAfterCreate(GDO $gdo): void
 	{
-		$user = $this->getUser();
-		$user->tempUnset('gdo_friendship_count');
-// 		$user->recache();
+		self::invalidateCount($this->getUser());
+	}
+
+	public function gdoAfterDelete(GDO $gdo): void
+	{
+		self::invalidateCount($this->getUser());
 	}
 
 	public function getUser(): GDO_User { return $this->gdoValue('friend_user'); }

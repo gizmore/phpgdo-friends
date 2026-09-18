@@ -4,6 +4,7 @@ namespace GDO\Friends;
 use GDO\Core\GDO;
 use GDO\Core\GDT_CreatedAt;
 use GDO\Core\GDT_Template;
+use GDO\DB\Cache;
 use GDO\Date\GDT_Timestamp;
 use GDO\Language\Trans;
 use GDO\UI\GDT_Message;
@@ -28,10 +29,26 @@ final class GDO_FriendRequest extends GDO
 	{
 		if (null === ($cached = $user->tempGet('gdo_friendrequest_count')))
 		{
-			$cached = self::table()->countWhere("frq_friend={$user->getID()} AND frq_denied IS NULL");
+			if (null === ($cached = Cache::get(self::cacheKey($user), PHP_INT_MAX)))
+			{
+				$cached = self::table()->countWhere("frq_friend={$user->getID()} AND frq_denied IS NULL");
+				Cache::set(self::cacheKey($user), $cached, 0);
+			}
 			$user->tempSet('gdo_friendrequest_count', $cached);
 		}
 		return $cached;
+	}
+
+	private static function cacheKey(GDO_User $user): string
+	{
+		return 'friends.request_count.' . $user->getID();
+	}
+
+	private function invalidateCount(): void
+	{
+		$user = $this->getFriend();
+		$user->tempUnset('gdo_friendrequest_count');
+		Cache::remove(self::cacheKey($user));
 	}
 
 	public function gdoCached(): bool { return false; }
@@ -56,9 +73,12 @@ final class GDO_FriendRequest extends GDO
 
 	public function gdoAfterCreate(GDO $gdo): void
 	{
-		$user = $this->getFriend();
-		$user->tempUnset('gdo_friendrequest_count');
+		$this->invalidateCount();
 	}
+
+	public function gdoAfterUpdate(GDO $gdo): void { $this->invalidateCount(); }
+
+	public function gdoAfterDelete(GDO $gdo): void { $this->invalidateCount(); }
 
 	public function getFriend(): GDO_User { return $this->gdoValue('frq_friend'); }
 
