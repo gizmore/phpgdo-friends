@@ -92,6 +92,17 @@ final class Module_Friends extends GDO_Module
 		return $this->getConfigValue('friendship_cleanup_age');
 	}
 
+	public function hookProfileMenubar(GDT_Bar $bar, GDO_User $user): void
+	{
+		$current = GDO_User::current();
+		if ($current->isAuthenticated() && $user->isUser() && $user->getID() !== $current->getID())
+		{
+			$bar->addField(GDT_Link::make('mt_friends_request')
+				->href(href('Friends', 'Request', '&frq_friend=' . $user->getID()))
+				->icon('add'));
+		}
+	}
+
 
 	##############
 	### Render ###
